@@ -1,0 +1,129 @@
+一、创建仓库
+
+1.安装好hit后，建立一个文件夹。右键选择bit bash here，在弹出的命令行中输入以下指令。
+
+git init
+
+
+2.添加文件，在文件夹中新增一个文件msg.txt后，使用以下指令将文件加入到仓库列表。
+
+git add msg.txt
+
+git commit -m "add a new file"
+
+
+3.修改文件，修改文件后使用以下指令。
+
+git status //查看状态
+
+git add msg.txt //再次提交到列表
+
+git diff msg.txt //查看不同
+
+git commit -m "update file" //提交修改
+
+注意：每次修改都需要执行add指令，将修改提交到暂存区，这样在执行commit时才能将修改提交到本地版本库
+
+
+4.查看修改日志
+
+git log //查看日志
+
+git log --pretty=oneline //查看简约日志
+3fc522d99f77c898c2eeec0ef5536170a1b21540 (HEAD -> master) add new line
+4ebe7b753d9579d30be27b7a48f8ac8e0146a388 create a new file msg.txt
+
+3fc522d99f77c898c2eeec0ef5536170a1b21540 是commit的版本号，值唯一。
+
+HEAD表示当前版本
+
+
+5.版本后退和记录
+
+git reset --hard HEAD^ 
+
+HEAD^ 表示上个版本
+
+HEAD^^表示上上个版本
+
+HEAD~100表示前面第一百个版本
+
+git reset --hard 3f522 //又回到以前最新的版本 HEAD
+
+git reflog //查看历史指令记录,可以看到commit id。
+3fc522d (HEAD -> master) HEAD@{0}: reset: moving to 3fc522
+4ebe7b7 HEAD@{1}: reset: moving to HEAD^
+3fc522d (HEAD -> master) HEAD@{2}: commit: add new line
+4ebe7b7 HEAD@{3}: commit (initial): create a new file msg.txt
+
+
+6.编辑文件
+
+vi msg.txt
+
+按 i 进入编辑模式
+
+修改完毕后按esc退出编辑模式
+
+输入
+
+:wq  or :x 保存退出
+
+:q! 强制退出，不保存修改
+
+
+7.撤销修改
+
+可以通过git status查看状态，然后根据提示的指令进行撤销，例如：
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   msg.txt
+撤销回到上一状态：
+$ git restore msg.txt
+
+注意：以上修改针对于本地库，如果提交到了远程库则无力回天。
+
+
+8.删除文件
+$ git rm msg.txt
+$ git commit -m "remove msg.txt"
+
+9.创建github密钥
+
+第一步、申请github账户
+
+第二步、在git bash 生成密钥
+
+$ ssh-keygen -t rsa -C "39045334@qq.com"
+Your identification has been saved in /c/Users/aaa/.ssh/id_rsa //私钥
+Your public key has been saved in /c/Users/aaa/.ssh/id_rsa.pub //公钥
+
+第三步、进入到公钥目录并查看公钥
+aaa@DESKTOP-GSC418K MINGW64 /c/users/aaa
+$ cd .ssh
+
+aaa@DESKTOP-GSC418K MINGW64 /c/users/aaa/.ssh
+$ dir
+id_rsa  id_rsa.pub  known_hosts
+
+aaa@DESKTOP-GSC418K MINGW64 /c/users/aaa/.ssh
+$ cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCr2UzHLLQ15Rb4XHFarRMrAbMb3uhXKDjRhum+66X4+IeGhZTZRwSd5suDlRGrHNBlLDHEa4OFvNWEm1ehQCQfo9NSIIOBH/SNzBJiJ6ScMAvi62QDgTXwjvew1p/iEG29RHG6u4hHsyVNHyrZw/GM3ILYsaQwyCrm+DK4I6yYN5zU1TcNf+rwz53RdaBriv5Cm+FDM7CeC7NOwBZQsKbYtfwiGvLzvte/EE0TgO2XLO4EqRrqSkoD8bRlsXXZt3gWnlz5B4kacLLNRrk1UCs9iDiEIU5AfgHSujdNMOebigbYR6jO+C7MtOwbmRkq1caSPvWnFZLlH92Yf1YwN8WImCYeP
+
+第四步、登陆github网站，在设置->账户->ssh密钥->新ssh密钥->输入标题和密钥，点击提交。
+
+可以生成多个key，每台电脑生成一个key。
+
+最后友情提示，在GitHub上免费托管的Git仓库，任何人都可以看到喔（但只有你自己才能改）。
+
+如果你不想让别人看到Git库，有两个办法：
+
+一个是交点保护费，让GitHub把公开的仓库变成私有的，这样别人就看不见了（不可读更不可写）。
+
+另一个办法是自己动手，搭一个Git服务器，因为是你自己的Git服务器，所以别人也是看不见的。
+
+
+
