@@ -1,7 +1,0 @@
-There is a message .
-
-The message content is hellow world!
-
-English is very good!
-
-update for message 44444!!!!
